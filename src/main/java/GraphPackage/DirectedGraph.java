@@ -22,6 +22,21 @@ public class DirectedGraph<T> implements GraphInterface<T>
         return addOutcome == null; // Was addition to dictionary successful?
     } // end addVertex
 
+    public boolean removeVertex(T vertexLabel) {
+        // remove the vertex itself
+        VertexInterface<T> removeOutcome = vertices.remove(vertexLabel);
+
+        // iterate through all other vertices, removing the original vertex
+        // from the list of edges of each vertex
+        Iterator<T> iter = vertices.getKeyIterator();
+        while (iter.hasNext()) {
+            removeEdge(iter.next(), vertexLabel);
+        }
+
+        // use same methodology as addVertex for consistency
+        return removeOutcome == null;
+    }
+
     public boolean addEdge(T begin, T end, double edgeWeight)
     {
         boolean result = false;
@@ -58,6 +73,12 @@ public class DirectedGraph<T> implements GraphInterface<T>
         return found;
     } // end hasEdge
 
+    public boolean removeEdge(T begin, T end) {
+        VertexInterface<T> beginVertex = vertices.getValue(begin);
+        VertexInterface<T> endVertex = vertices.getValue(end);
+        return beginVertex.disconnect(endVertex);
+    }
+
     public boolean isEmpty()
     {
         return vertices.isEmpty();
@@ -68,6 +89,15 @@ public class DirectedGraph<T> implements GraphInterface<T>
         vertices.clear();
         edgeCount = 0;
     } // end clear
+
+    public ListWithIteratorInterface<T> getVertexLabels() {
+        Iterator<T> iter = vertices.getKeyIterator();
+        LinkedListWithIterator<T> out = new LinkedListWithIterator<>();
+        while (iter.hasNext()) {
+            out.add(iter.next());
+        }
+        return out;
+    }
 
     public int getNumberOfVertices()
     {

@@ -22,6 +22,10 @@ public class UndirectedGraph<T> extends DirectedGraph<T> implements GraphInterfa
         return this.addEdge(begin, end, 0);
     } // end addEdge
 
+    public boolean removeEdge(T begin, T end) {
+        return super.removeEdge(begin, end) && super.removeEdge(end, begin);
+    }
+
     public int getNumberOfEdges()
     {
         return super.getNumberOfEdges() / 2;

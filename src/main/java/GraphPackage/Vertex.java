@@ -147,6 +147,17 @@ class Vertex<T> implements VertexInterface<T>
         return connect(endVertex, 0);
     } // end connect
 
+    public boolean disconnect(VertexInterface<T> endVertex) {
+        Iterator<Edge> iter = edgeList.getIterator();
+        while (iter.hasNext()) {
+            if (iter.next() == endVertex.getLabel()) {
+                iter.remove();
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Iterator<VertexInterface<T>> getNeighborIterator()
     {
         return new NeighborIterator();
