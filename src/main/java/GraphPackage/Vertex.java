@@ -152,6 +152,17 @@ class Vertex<T> implements VertexInterface<T>
         return new NeighborIterator();
     } // end getNeighborIterator
 
+    public boolean disconnect(VertexInterface<T> endVertex) {
+        Iterator<Edge> iter = edgeList.getIterator();
+        while (iter.hasNext()) {
+            if (iter.next() == endVertex.getLabel()) {
+                iter.remove();
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean hasNeighbor()
     {
         return !edgeList.isEmpty();
