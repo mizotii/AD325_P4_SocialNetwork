@@ -3,6 +3,7 @@ package GraphPackage;
 
 import ADTPackage.*;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class DirectedGraph<T> implements GraphInterface<T>
@@ -125,7 +126,25 @@ public class DirectedGraph<T> implements GraphInterface<T>
     {
         resetVertices();
         QueueInterface<T> traversalOrder = new LinkedQueue<>();               // Queue of vertex labels
+        QueueInterface<VertexInterface<T>> vertexQueue = new LinkedQueue<>();
 
+        VertexInterface<T> originVertex = vertices.getValue(origin);
+        originVertex.visit();
+        traversalOrder.enqueue(origin);
+        vertexQueue.enqueue(originVertex);
+
+        while (!vertexQueue.isEmpty()) {
+            VertexInterface<T> front = vertexQueue.dequeue();
+            Iterator<VertexInterface<T>> neighborIterator = front.getNeighborIterator();
+            while (neighborIterator.hasNext()) {
+                VertexInterface<T> nextNeighbor = neighborIterator.next();
+                if (!nextNeighbor.isVisited()) {
+                    nextNeighbor.visit();
+                    traversalOrder.enqueue(nextNeighbor.getLabel());
+                    vertexQueue.enqueue(nextNeighbor);
+                }
+            }
+        }
 
         return traversalOrder;
     } // end getBreadthFirstTraversal
