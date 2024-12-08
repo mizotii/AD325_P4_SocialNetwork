@@ -35,6 +35,14 @@ public interface VertexInterface<T>
      @return  True if the edge is added, or false if not. */
     public boolean connect(VertexInterface<T> endVertex);
 
+    /**
+     * Disconnects this vertex and an end vertex if this vertex
+     * has an edge with the end vertex.
+     * @param endVertex A vertex sharing an edge to be removed.
+     * @return True if disconnect successful, false otherwise.
+     */
+    public boolean disconnect(VertexInterface<T> endVertex);
+
     /** Creates an iterator of this vertex's neighbors by following
      all edges that begin at this vertex.
      @return  An iterator of the neighboring vertices of this vertex. */
