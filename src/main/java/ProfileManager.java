@@ -1,6 +1,7 @@
 import ADTPackage.LinkedListWithIterator;
 import ADTPackage.LinkedQueue;
 import ADTPackage.ListWithIteratorInterface;
+import ADTPackage.QueueInterface;
 import GraphPackage.UndirectedGraph;
 
 import java.util.LinkedList;
@@ -45,17 +46,20 @@ public class ProfileManager {
      * Displays every profile in the network.
      */
     public void displayProfiles() {
-        ListWithIteratorInterface<Profile> profiles = getProfiles();
+        ListWithIteratorInterface<Profile> profiles = network.getVertexLabels();
         for (Profile p : profiles) {
             p.display();
         }
     }
 
-    public void displayProfilesAndFriends(Profile user) {
-        ListWithIteratorInterface<Profile> profiles = getProfiles();
-    }
-
-    private ListWithIteratorInterface<Profile> getProfiles() {
-        return network.getVertexLabels();
+    /**
+     * Displays every profile in the network of the current user.
+     * @param currentUser The user being operated on in the menu
+     */
+    public void displayProfilesAndFriends(Profile currentUser) {
+        QueueInterface<Profile> queue = network.getBreadthFirstTraversal(currentUser);
+        while (!queue.isEmpty()) {
+            queue.dequeue().display();
+        }
     }
 }
