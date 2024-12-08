@@ -45,13 +45,17 @@ public class ProfileManager {
      * Displays every profile in the network.
      */
     public void displayProfiles() {
-        ListWithIteratorInterface<Profile> profiles = network.getVertexLabels();
+        ListWithIteratorInterface<Profile> profiles = getProfiles();
         for (Profile p : profiles) {
             p.display();
         }
     }
 
-    public void displayProfilesAndFriends() {
+    public void displayProfilesAndFriends(Profile user) {
+        ListWithIteratorInterface<Profile> profiles = getProfiles();
+    }
 
+    private ListWithIteratorInterface<Profile> getProfiles() {
+        return network.getVertexLabels();
     }
 }
