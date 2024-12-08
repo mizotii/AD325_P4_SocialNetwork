@@ -27,6 +27,14 @@ public interface VertexInterface<T>
      @return  True if the edge is added, or false if not. */
     public boolean connect(VertexInterface<T> endVertex, double edgeWeight);
 
+    /**
+     * Disconnects this vertex and an end vertex if this vertex
+     * has an edge with the end vertex.
+     * @param endVertex A vertex sharing an edge to be removed.
+     * @return True if disconnect successful, false otherwise.
+     */
+    public boolean disconnect(VertexInterface<T> endVertex);
+
     /** Connects this vertex and a given vertex with an unweighted
      edge. The two vertices cannot be the same, and must not
      already have this edge between them. In a directed graph,
