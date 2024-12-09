@@ -25,6 +25,10 @@ public class Profile {
         return avatar;
     }
 
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -39,6 +43,10 @@ public class Profile {
 
     public void removeFriend(Profile friend) {
         friendList.remove(friend);
+    }
+
+    public ArrayList<Profile> getFriends() {
+        return friendList;
     }
 
     public void display() {

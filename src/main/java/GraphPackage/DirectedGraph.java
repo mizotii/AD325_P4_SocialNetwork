@@ -3,6 +3,7 @@ package GraphPackage;
 
 import ADTPackage.*;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class DirectedGraph<T> implements GraphInterface<T>
@@ -21,6 +22,22 @@ public class DirectedGraph<T> implements GraphInterface<T>
         VertexInterface<T> addOutcome = vertices.add(vertexLabel, new Vertex<>(vertexLabel));
         return addOutcome == null; // Was addition to dictionary successful?
     } // end addVertex
+
+    public boolean removeVertex(T vertexLabel) {
+        // remove the vertex itself
+        VertexInterface<T> removeOutcome = vertices.remove(vertexLabel);
+
+        // iterate through all other vertices, removing the original vertex
+        // from the list of edges of each vertex
+        Iterator<T> iter = vertices.getKeyIterator();
+        while (iter.hasNext()) {
+            removeEdge(iter.next(), vertexLabel);
+        }
+
+        // use same methodology as addVertex for consistency, except a success
+        // in this case means that our outcome is not null
+        return removeOutcome != null;
+    }
 
     public boolean addEdge(T begin, T end, double edgeWeight)
     {
@@ -58,6 +75,12 @@ public class DirectedGraph<T> implements GraphInterface<T>
         return found;
     } // end hasEdge
 
+    public boolean removeEdge(T begin, T end) {
+        VertexInterface<T> beginVertex = vertices.getValue(begin);
+        VertexInterface<T> endVertex = vertices.getValue(end);
+        return beginVertex.disconnect(endVertex);
+    }
+
     public boolean isEmpty()
     {
         return vertices.isEmpty();
@@ -68,6 +91,15 @@ public class DirectedGraph<T> implements GraphInterface<T>
         vertices.clear();
         edgeCount = 0;
     } // end clear
+
+    public ListWithIteratorInterface<T> getVertexLabels() {
+        Iterator<T> iter = vertices.getKeyIterator();
+        LinkedListWithIterator<T> out = new LinkedListWithIterator<>();
+        while (iter.hasNext()) {
+            out.add(iter.next());
+        }
+        return out;
+    }
 
     public int getNumberOfVertices()
     {
@@ -95,7 +127,25 @@ public class DirectedGraph<T> implements GraphInterface<T>
     {
         resetVertices();
         QueueInterface<T> traversalOrder = new LinkedQueue<>();               // Queue of vertex labels
+        QueueInterface<VertexInterface<T>> vertexQueue = new LinkedQueue<>();
 
+        VertexInterface<T> originVertex = vertices.getValue(origin);
+        originVertex.visit();
+        traversalOrder.enqueue(origin);
+        vertexQueue.enqueue(originVertex);
+
+        while (!vertexQueue.isEmpty()) {
+            VertexInterface<T> front = vertexQueue.dequeue();
+            Iterator<VertexInterface<T>> neighborIterator = front.getNeighborIterator();
+            while (neighborIterator.hasNext()) {
+                VertexInterface<T> nextNeighbor = neighborIterator.next();
+                if (!nextNeighbor.isVisited()) {
+                    nextNeighbor.visit();
+                    traversalOrder.enqueue(nextNeighbor.getLabel());
+                    vertexQueue.enqueue(nextNeighbor);
+                }
+            }
+        }
 
         return traversalOrder;
     } // end getBreadthFirstTraversal
