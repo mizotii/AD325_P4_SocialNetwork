@@ -2,13 +2,15 @@ package GraphPackage;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class VertexTest {
 
     @Test
     void getLabel() {
-        Vertex<Integer> v1 = new Vertex<>(5);
+        VertexInterface<Integer> v1 = new Vertex<>(5);
         assertEquals(v1.getLabel(), 5);
     }
 
@@ -81,36 +83,85 @@ class VertexTest {
     void testToString() {
         VertexInterface<Integer> v1 = new Vertex<>(5);
         v1.setCost(10);
-        String expected = "Vertex{label=5, cost=10}";
+        String expected = "5";
         assertEquals(expected, v1.toString());
     }
 
     @Test
     void getWeightIterator() {
+        VertexInterface<Integer> v1 = new Vertex<>(5);
+        VertexInterface<Integer> v2 = new Vertex<>(7);
+        VertexInterface<Integer> v3 = new Vertex<>(9);
+        v1.connect(v2, 2.0);
+        v2.connect(v3, 3.0);
+        v1.connect(v3, 4.0);
+        Iterator<Double> it = v1.getWeightIterator();
+        assertTrue(it.hasNext());
+        it.next();
+        assertEquals(4.0, it.next(), 0.001);
     }
 
     @Test
     void connect() {
+        VertexInterface<Integer> v1 = new Vertex<>(5);
+        VertexInterface<Integer> v2 = new Vertex<>(7);
+        v1.connect(v2, 2.0);
+        Iterator<Double> it = v1.getWeightIterator();
+        assertTrue(it.hasNext());
+        assertEquals(2.0, it.next(), 0.001);
     }
 
     @Test
     void testConnect() {
+        VertexInterface<Integer> v1 = new Vertex<>(5);
+        VertexInterface<Integer> v2 = new Vertex<>(7);
+        v1.connect(v2);
+        Iterator<VertexInterface<Integer>> it = v1.getNeighborIterator();
+        assertTrue(it.hasNext());
+        assertEquals(it.next(), v2);
     }
 
     @Test
     void getNeighborIterator() {
+        VertexInterface<Integer> v1 = new Vertex<>(5);
+        VertexInterface<Integer> v2 = new Vertex<>(7);
+        VertexInterface<Integer> v3 = new Vertex<>(9);
+        v1.connect(v2);
+        v1.connect(v3);
+        Iterator<VertexInterface<Integer>> it = v1.getNeighborIterator();
+        assertTrue(it.hasNext());
+        it.next();
+        assertEquals(v3.getLabel(), it.next().getLabel());
     }
 
     @Test
     void hasNeighbor() {
+        VertexInterface<Integer> v1 = new Vertex<>(5);
+        VertexInterface<Integer> v2 = new Vertex<>(7);
+        assertFalse(v1.hasNeighbor());
+        v1.connect(v2);
+        assertTrue(v1.hasNeighbor());
+        assertFalse(v2.hasNeighbor());
+        v2.connect(v1);
+        assertTrue(v2.hasNeighbor());
     }
 
     @Test
     void getUnvisitedNeighbor() {
+        VertexInterface<Integer> v1 = new Vertex<>(5);
+        VertexInterface<Integer> v2 = new Vertex<>(7);
+        VertexInterface<Integer> v3 = new Vertex<>(9);
+        v1.connect(v2);
+        v1.connect(v3);
+        v2.visit();
+        assertEquals(v3, v1.getUnvisitedNeighbor());
     }
 
     @Test
     void testEquals() {
+        VertexInterface<Integer> v1 = new Vertex<>(5);
+        VertexInterface<Integer> v2 = new Vertex<>(5);
+        assertEquals(v1, v2);
     }
 
     @Test
