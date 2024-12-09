@@ -154,13 +154,17 @@ class Vertex<T> implements VertexInterface<T>
 
     public boolean disconnect(VertexInterface<T> endVertex) {
         Iterator<Edge> iter = edgeList.getIterator();
+        T label = endVertex.getLabel();
+        int position = 1;
+        boolean found = false;
         while (iter.hasNext()) {
-            if (iter.next() == endVertex.getLabel()) {
-                iter.remove();
-                return true;
+            if (iter.next().getEndVertex().getLabel() == label) {
+                found = true;
+                break;
             }
         }
-        return false;
+        edgeList.remove(position);
+        return found;
     }
 
     public boolean hasNeighbor()
