@@ -34,8 +34,9 @@ public class DirectedGraph<T> implements GraphInterface<T>
             removeEdge(iter.next(), vertexLabel);
         }
 
-        // use same methodology as addVertex for consistency
-        return removeOutcome == null;
+        // use same methodology as addVertex for consistency, except a success
+        // in this case means that our outcome is not null
+        return removeOutcome != null;
     }
 
     public boolean addEdge(T begin, T end, double edgeWeight)
