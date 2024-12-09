@@ -105,7 +105,8 @@ class VertexTest {
     void connect() {
         VertexInterface<Integer> v1 = new Vertex<>(5);
         VertexInterface<Integer> v2 = new Vertex<>(7);
-        v1.connect(v2, 2.0);
+        boolean success = v1.connect(v2, 2.0);
+        assertTrue(success);
         Iterator<Double> it = v1.getWeightIterator();
         assertTrue(it.hasNext());
         assertEquals(2.0, it.next(), 0.001);
@@ -115,7 +116,8 @@ class VertexTest {
     void testConnect() {
         VertexInterface<Integer> v1 = new Vertex<>(5);
         VertexInterface<Integer> v2 = new Vertex<>(7);
-        v1.connect(v2);
+        boolean success = v1.connect(v2);
+        assertTrue(success);
         Iterator<VertexInterface<Integer>> it = v1.getNeighborIterator();
         assertTrue(it.hasNext());
         assertEquals(it.next(), v2);
