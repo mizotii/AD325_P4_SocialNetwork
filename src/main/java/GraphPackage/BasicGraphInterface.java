@@ -10,6 +10,13 @@ public interface BasicGraphInterface<T>
      @return  True if the vertex is added, or false if not. */
     public boolean addVertex(T vertexLabel);
 
+    /**
+     * Removes a given vertex from this graph.
+     * @param vertexLabel A distinct label of the vertex to be removed.
+     * @return True is vertex was successfully removed, false if not
+     */
+    public boolean removeVertex(T vertexLabel);
+
     /** Adds a weighted edge between two given distinct vertices that
      are currently in this graph. The desired edge must not already
      be in the graph. In a directed graph, the edge points toward
