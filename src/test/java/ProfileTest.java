@@ -1,4 +1,9 @@
+// Joel Yang: created all unit tests for this class.
+
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -71,5 +76,14 @@ class ProfileTest {
 
     @Test
     void display() {
+        p = new Profile("turtle", "turtle.png", "Online");
+        Profile p2 = new Profile("goose", "goose.png", "Online");
+        p.addFriend(p2);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(out));
+        p.display();
+        assertEquals(out.toString(), "Name: turtle\r\nAvatar: turtle.png\r\nStatus: Online\r\n\r\nFriends: \r\ngoose\r\n");
+        System.setOut(originalOut);
     }
 }

@@ -1,3 +1,5 @@
+// Joel Yang: implemented disconnect
+
 package GraphPackage;
 
 import java.util.Iterator;

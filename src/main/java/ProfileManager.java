@@ -1,3 +1,5 @@
+// Joel Yang: implemented this class
+
 import ADTPackage.LinkedListWithIterator;
 import ADTPackage.LinkedQueue;
 import ADTPackage.ListWithIteratorInterface;
@@ -41,6 +43,8 @@ public class ProfileManager {
      * friend list. False if either user doesn't exist.
      */
     public boolean addFriendship(Profile user, Profile friend) {
+        user.addFriend(friend);
+        friend.addFriend(user);
         return network.addEdge(user, friend);
     }
 

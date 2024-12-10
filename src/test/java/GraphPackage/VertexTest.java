@@ -1,3 +1,6 @@
+
+// Joel Yang: see: Vertex.java, VertexInterface.java
+
 package GraphPackage;
 
 import org.junit.jupiter.api.Test;
