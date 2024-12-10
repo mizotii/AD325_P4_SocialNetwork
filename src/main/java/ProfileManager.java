@@ -64,4 +64,34 @@ public class ProfileManager {
             queue.dequeue().display();
         }
     }
+
+    /**
+     * Determines wether the profile is in the network given its username
+     * @param username of profile
+     * @return true if profile is in network, false if isn't
+     */
+    public boolean containsProfile(String username) {
+        ListWithIteratorInterface<Profile> profiles = network.getVertexLabels();
+        for (Profile p : profiles) {
+            if(p.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Get the profile from the network given a username
+     * @param username of profile to retrieve
+     * @return profile given the username
+     */
+    public Profile retrieveProfile(String username) {
+        ListWithIteratorInterface<Profile> profiles = network.getVertexLabels();
+        for (Profile p : profiles) {
+            if(p.getUsername().equals(username)) {
+                return p;
+            }
+        }
+        return null;
+    }
 }
