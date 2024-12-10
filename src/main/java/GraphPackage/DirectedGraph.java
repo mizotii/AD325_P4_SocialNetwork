@@ -1,3 +1,6 @@
+// Joel Yang: implemented removeVertex, removeEdge, getVertexLabels,
+// and getBreadthFirstTraversal
+
 package GraphPackage;
 
 

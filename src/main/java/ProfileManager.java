@@ -1,3 +1,5 @@
+// Joel Yang: implemented this class
+
 import ADTPackage.LinkedListWithIterator;
 import ADTPackage.LinkedQueue;
 import ADTPackage.ListWithIteratorInterface;

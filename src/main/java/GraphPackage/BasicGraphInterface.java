@@ -1,3 +1,5 @@
+// Joel Yang: implemented removeVertex, removeEdge, getVertexLabels
+
 package GraphPackage;
 
 import ADTPackage.ListWithIteratorInterface;
