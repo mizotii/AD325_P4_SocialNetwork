@@ -69,6 +69,7 @@ public class ProfileManager {
         }
     }
 
+    //Eric Norman added the two below methods
     /**
      * Determines wether the profile is in the network given its username
      * @param username of profile

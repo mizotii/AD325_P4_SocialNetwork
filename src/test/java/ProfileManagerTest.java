@@ -78,4 +78,21 @@ class ProfileManagerTest {
                         "Name: turtle\r\nAvatar: turtle.png\r\nStatus: Online\r\n\r\nFriends: \r\ngoose\r\n");
         System.setOut(originalOut);
     }
+
+    //Eric Norman tested the two below methods
+    @Test
+    void containsProfile() {
+        m = new ProfileManager();
+        Profile p = new Profile("turtle", "turtle.png", "Online");
+        m.addProfile(p);
+        assertTrue(m.containsProfile("turtle"));
+    }
+
+    @Test
+    void retrieveProfile() {
+        m = new ProfileManager();
+        Profile p = new Profile("turtle", "turtle.png", "Online");
+        m.addProfile(p);
+        assertEquals(p, m.retrieveProfile("turtle"));
+    }
 }

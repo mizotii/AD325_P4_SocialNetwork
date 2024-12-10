@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+//Eric Norman did the entirety of this class
 public class Profile {
     private String name;
     private String avatar;
