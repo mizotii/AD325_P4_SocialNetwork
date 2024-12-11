@@ -98,10 +98,10 @@ public class Profile {
         System.out.println("Name: " + name);
         System.out.println("Avatar: " + avatar);
         System.out.println("Status: " + status);
-        System.out.println("Friends: ");
+        System.out.print("Friends: ");
         for (Profile friend : friendList) {
             System.out.print(friend.getUsername() + " ");
         }
-        System.out.println();
+        System.out.println("\n");
     }
 }
