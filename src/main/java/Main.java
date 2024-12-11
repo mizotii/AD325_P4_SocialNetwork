@@ -26,6 +26,7 @@ public class Main {
                 break;
             }
         }
+        //I could have, and probably should have, extracted these while loops into their own methods
         while (true) {
             System.out.println("Choose an element: \nEarth: earth \nWind: wind \nFire: fire \nWater: water");
             String input = sc.nextLine();
@@ -77,6 +78,7 @@ public class Main {
         }
     }
 
+    //Create initial network
     public static ProfileManager setUpNetwork() {
         ProfileManager network = new ProfileManager();
         Profile ejnorman = new Profile("ejnorman", "src/avatars/earth.png", "Online");
@@ -94,6 +96,7 @@ public class Main {
         return network;
     }
 
+    //modify a user profile
     public static Profile modify(Profile user, ProfileManager network, Scanner sc) {
         while (true) {
             System.out.println("Modify: \nUsername: u \nAvatar: a \nStatus: s \nExit: e");
@@ -142,10 +145,12 @@ public class Main {
         return user;
     }
 
+    //view all profiles in the network
     public static void viewAll(ProfileManager network) {
         network.displayProfiles();
     }
 
+    //add a friend to current user
     public static ProfileManager addFriend(Profile user, ProfileManager network, Scanner sc) {
         System.out.println("Add a friend ");
         System.out.println("Friend username: ");
@@ -159,6 +164,7 @@ public class Main {
         return network;
     }
 
+    //view your friends list
     public static void viewFriendList(Profile user) {
         ArrayList<Profile> friends = user.getFriends();
         System.out.println(user.getUsername() + " friends list:");
@@ -167,6 +173,7 @@ public class Main {
         }
     }
 
+    //view your friends friend list (if you have any)
     public static void viewFriendsFriendList(Profile user, ProfileManager network, Scanner sc) {
         ArrayList<Profile> friends = user.getFriends();
         System.out.println("Enter your friend's name: ");
@@ -184,6 +191,7 @@ public class Main {
         System.out.println("User is not your friend");
     }
 
+    //delete profile from network
     public static ProfileManager deleteProfile(Profile user, ProfileManager network, Scanner sc) {
         System.out.println("Username of profile to be deleted: ");
         String profileName = sc.nextLine();
@@ -200,6 +208,7 @@ public class Main {
         return network;
     }
 
+    //add profile to the network
     public static ProfileManager addProfile(ProfileManager network, Scanner sc) {
         System.out.println("New profile ");
         String profileName, avatar;
@@ -232,6 +241,7 @@ public class Main {
         return network;
     }
 
+    //switch to another user in the network (or even yourself I guess)
     public static Profile switchUser(Profile user, ProfileManager network, Scanner sc) {
         System.out.println("What user would you like to switch to? ");
         String profileName = sc.nextLine();
