@@ -127,6 +127,17 @@ class VertexTest {
     }
 
     @Test
+    void disconnect() {
+        VertexInterface<Integer> v1 = new Vertex<>(5);
+        VertexInterface<Integer> v2 = new Vertex<>(7);
+        v1.connect(v2);
+        boolean success = v1.disconnect(v2);
+        assertTrue(success);
+        Iterator<VertexInterface<Integer>> it = v1.getNeighborIterator();
+        assertFalse(it.hasNext());
+    }
+
+    @Test
     void getNeighborIterator() {
         VertexInterface<Integer> v1 = new Vertex<>(5);
         VertexInterface<Integer> v2 = new Vertex<>(7);
@@ -166,7 +177,7 @@ class VertexTest {
     void testEquals() {
         VertexInterface<Integer> v1 = new Vertex<>(5);
         VertexInterface<Integer> v2 = new Vertex<>(5);
-        assertEquals(v1, v2);
+        assertTrue(v1.equals(v2));
     }
 
     @Test
