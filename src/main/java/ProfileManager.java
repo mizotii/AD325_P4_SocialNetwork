@@ -32,6 +32,10 @@ public class ProfileManager {
      * @return True if user was successfully removed, false otherwise
      */
     public boolean removeProfile(Profile user) {
+        ListWithIteratorInterface<Profile> profiles = network.getVertexLabels();
+        for (Profile profile : profiles) {
+            profile.removeFriend(user);
+        }
         return network.removeVertex(user);
     }
 
