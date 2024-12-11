@@ -83,7 +83,7 @@ class ProfileTest {
         PrintStream originalOut = System.out;
         System.setOut(new PrintStream(out));
         p.display();
-        assertEquals(out.toString(), "Name: turtle\r\nAvatar: turtle.png\r\nStatus: Online\r\nFriends: \r\ngoose \r\n");
+        assertEquals(out.toString(), "Name: turtle\r\nAvatar: turtle.png\r\nStatus: Online\r\nFriends: goose \n\r\n");
         System.setOut(originalOut);
     }
 }

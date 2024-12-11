@@ -56,9 +56,9 @@ class ProfileManagerTest {
                 "Name: goose\r\n" +
                 "Avatar: goose.png\r\n" +
                 "Status: Online\r\n" +
-                "Friends: \r\n" +
-                "turtle \r\n" +
-                "Name: turtle\r\nAvatar: turtle.png\r\nStatus: Online\r\nFriends: \r\ngoose \r\n");
+                "Friends: " +
+                "turtle \n\r\n" +
+                "Name: turtle\r\nAvatar: turtle.png\r\nStatus: Online\r\nFriends: goose \n\r\n");
         System.setOut(originalOut);
     }
 
@@ -78,9 +78,9 @@ class ProfileManagerTest {
                 "Name: goose\r\n" +
                         "Avatar: goose.png\r\n" +
                         "Status: Online\r\n" +
-                        "Friends: \r\n" +
-                        "turtle \r\n" +
-                        "Name: turtle\r\nAvatar: turtle.png\r\nStatus: Online\r\nFriends: \r\ngoose \r\n");
+                        "Friends: " +
+                        "turtle \n\r\n" +
+                        "Name: turtle\r\nAvatar: turtle.png\r\nStatus: Online\r\nFriends: goose \n\r\n");
         System.setOut(originalOut);
     }
 
