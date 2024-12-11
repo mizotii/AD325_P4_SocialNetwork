@@ -4,6 +4,7 @@
 package GraphPackage;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import java.util.Iterator;
 
@@ -113,6 +114,12 @@ class VertexTest {
         Iterator<Double> it = v1.getWeightIterator();
         assertTrue(it.hasNext());
         assertEquals(2.0, it.next(), 0.001);
+        assertThrows(UnsupportedOperationException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                it.remove();
+            }
+        });
     }
 
     @Test
@@ -174,10 +181,14 @@ class VertexTest {
     }
 
     @Test
-    void testEquals() {
+    void equals() {
         VertexInterface<Integer> v1 = new Vertex<>(5);
         VertexInterface<Integer> v2 = new Vertex<>(5);
+        VertexInterface<Integer> v3 = null;
+        Integer i = 3;
         assertTrue(v1.equals(v2));
+        assertFalse(v1.equals(v3));
+        assertFalse(v1.equals(i));
     }
 
     @Test
