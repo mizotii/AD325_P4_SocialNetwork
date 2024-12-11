@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+
+// Joel Yang: created the UML diagram
 //Eric Norman did the entirety of this class
+
 public class Main {
     public static void main(String[] args) {
         ProfileManager network = setUpNetwork();
