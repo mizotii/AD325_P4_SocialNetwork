@@ -102,5 +102,6 @@ public class Profile {
         for (Profile friend : friendList) {
             System.out.print(friend.getUsername() + " ");
         }
+        System.out.println();
     }
 }
