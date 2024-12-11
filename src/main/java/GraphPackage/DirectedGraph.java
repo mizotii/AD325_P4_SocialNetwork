@@ -27,15 +27,15 @@ public class DirectedGraph<T> implements GraphInterface<T>
     } // end addVertex
 
     public boolean removeVertex(T vertexLabel) {
-        // remove the vertex itself
-        VertexInterface<T> removeOutcome = vertices.remove(vertexLabel);
-
         // iterate through all other vertices, removing the original vertex
         // from the list of edges of each vertex
         Iterator<T> iter = vertices.getKeyIterator();
         while (iter.hasNext()) {
             removeEdge(iter.next(), vertexLabel);
         }
+
+        // remove the vertex itself
+        VertexInterface<T> removeOutcome = vertices.remove(vertexLabel);
 
         // use same methodology as addVertex for consistency, except a success
         // in this case means that our outcome is not null

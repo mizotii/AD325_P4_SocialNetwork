@@ -165,7 +165,9 @@ class Vertex<T> implements VertexInterface<T>
                 break;
             }
         }
-        edgeList.remove(position);
+        if (found) {
+            edgeList.remove(position);
+        }
         return found;
     }
 
